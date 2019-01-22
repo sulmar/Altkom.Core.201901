@@ -1,11 +1,17 @@
 ﻿using Altkom.DotnetCore.IServices;
 using Altkom.DotnetCore.Models;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Altkom.DotnetCore.FakeServices
 {
+    public class CustomerServiceOptions
+    {
+        public int Count { get; set; }
+    }
+
     public class FakeCustomerService : ICustomerService
     {
         private ICollection<Customer> customers;
@@ -13,11 +19,12 @@ namespace Altkom.DotnetCore.FakeServices
         private CustomerFaker customerFaker;
 
         // snippet: ctor
-        public FakeCustomerService(CustomerFaker customerFaker)
+        public FakeCustomerService(CustomerFaker customerFaker, 
+            IOptions<CustomerServiceOptions> options)
         {
             this.customerFaker = customerFaker;
 
-            customers = customerFaker.Generate(100);
+            customers = customerFaker.Generate(options.Value.Count);
 
         }
 

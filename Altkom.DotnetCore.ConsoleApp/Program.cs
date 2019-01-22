@@ -41,13 +41,15 @@ namespace Altkom.DotnetCore.ConsoleApp
 
             // middleware z użyciem własnej metody
             app.Use(Process);
-
+            
             // middleware z użyciem własnej klasy
-            app.UseMiddleware<MyMiddleware>();
+       //     app.UseMiddleware<MyMiddleware>();
 
             // middleware z użyciem metody rozszerzającej
             app.UseMyMiddleware();
 
+            app.UseDasboard();
+            
             app.Run(async context => await context.Response.WriteAsync("Hello .NET Core"));
         }
 
@@ -72,7 +74,9 @@ namespace Altkom.DotnetCore.ConsoleApp
             this.next = next;
         }
 
-        public async Task Invoke(HttpContext context)
+
+        // Metoda musi się nazywać Invoke lub InvokeAsync
+        public async Task InvokeAsync(HttpContext context)
         {
             context.Response.Headers.Add("Site", "test");
 
@@ -80,11 +84,40 @@ namespace Altkom.DotnetCore.ConsoleApp
         }
     }
 
+    public class MyDashboard
+    {
+        private readonly RequestDelegate next;
+
+        public MyDashboard(RequestDelegate next)
+        {
+            this.next = next;
+
+        }
+
+        public async Task Invoke(HttpContext context)
+        {
+            await context.Response.WriteAsync("Hello Dashboard");
+
+            await next.Invoke(context);
+        }
+
+
+    }
+
     public static class RequestMyMiddlewareExtensions
     {
         public static IApplicationBuilder UseMyMiddleware(this IApplicationBuilder builder)
         {
             return builder.UseMiddleware<MyMiddleware>();
+        }
+    }
+
+    public static class RequestMyDashboardExtensions
+    {
+        public static IApplicationBuilder UseDasboard(this IApplicationBuilder builder, string path = "/dashboard")
+        {
+            return builder.Map(new PathString(path), 
+                a => a.UseMiddleware<MyDashboard>());
         }
     }
 

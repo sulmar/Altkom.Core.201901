@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Altkom.DotnetCore.WebApp</name>
+    </assembly>
+    <members>
+        <member name="M:Altkom.DotnetCore.WebApp.Controllers.CustomersController.Get(System.Int32)">
+            <summary>
+            Get customer by identifier
+            </summary>
+            <param name="id">Customer identifier</param>
+            <returns></returns>
+            <response code="201">Returns new customer</response>
+            <response code="400">Customer not found</response>
+        </member>
+        <member name="M:Altkom.DotnetCore.WebApp.Controllers.CustomersController.Post(Altkom.DotnetCore.Models.Customer)">
+            <summary>
+            Create a customer 
+            </summary>
+            <remarks>
+            sample request:
+                POST /customers
+                {
+                    "Id": 1,
+                    "FirstName": "John",
+                    "LastName": "Smith"
+                }
+            </remarks>        
+            <param name="customer">Customer data</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

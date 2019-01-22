@@ -5,7 +5,6 @@ namespace Altkom.DotnetCore.Models
     public class Customer : Base
     {
         // snippet: prop
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Gender Gender { get; set; }

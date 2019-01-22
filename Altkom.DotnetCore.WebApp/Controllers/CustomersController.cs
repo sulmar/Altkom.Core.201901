@@ -27,7 +27,16 @@ namespace Altkom.DotnetCore.WebApp.Controllers
             return Ok(customers);
         }
 
+        /// <summary>
+        /// Get customer by identifier
+        /// </summary>
+        /// <param name="id">Customer identifier</param>
+        /// <returns></returns>
+        /// <response code="201">Returns new customer</response>
+        /// <response code="400">Customer not found</response>
         [HttpGet("{id:int}")]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
         public IActionResult Get(int id)
         {
             var customer = customerService.Get(id);
@@ -43,12 +52,21 @@ namespace Altkom.DotnetCore.WebApp.Controllers
             throw new NotImplementedException();
         }
 
-        public IActionResult GetActive()
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost]
+        /// <summary>
+        /// Create a customer 
+        /// </summary>
+        /// <remarks>
+        /// sample request:
+        ///     POST /customers
+        ///     {
+        ///         "Id": 1,
+        ///         "FirstName": "John",
+        ///         "LastName": "Smith"
+        ///     }
+        /// </remarks>        
+        /// <param name="customer">Customer data</param>
+        /// <returns></returns>
+        [HttpPost]        
         public IActionResult Post(Customer customer)
         {
             customerService.Add(customer);
