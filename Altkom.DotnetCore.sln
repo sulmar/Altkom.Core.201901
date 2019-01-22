@@ -5,6 +5,14 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altkom.DotnetCore.ConsoleApp", "Altkom.DotnetCore.ConsoleApp\Altkom.DotnetCore.ConsoleApp.csproj", "{072DA31E-D5D3-4C99-85AC-C93392071493}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altkom.DotnetCore.WebApp", "Altkom.DotnetCore.WebApp\Altkom.DotnetCore.WebApp.csproj", "{7B8E28D9-137E-424D-8488-E9AFFCEDB189}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altkom.DotnetCore.Models", "Altkom.DotnetCore.Models\Altkom.DotnetCore.Models.csproj", "{98F60C8E-884B-4E51-AC25-94C590EF4399}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altkom.DotnetCore.IServices", "Altkom.DotnetCore.IServices\Altkom.DotnetCore.IServices.csproj", "{9DB9953F-7137-41AB-A563-BE82DBF6FEAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altkom.DotnetCore.FakeServices", "Altkom.DotnetCore.FakeServices\Altkom.DotnetCore.FakeServices.csproj", "{3DFC88E7-8547-42D9-B9F6-5DE92B92ACD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +23,22 @@ Global
 		{072DA31E-D5D3-4C99-85AC-C93392071493}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{072DA31E-D5D3-4C99-85AC-C93392071493}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{072DA31E-D5D3-4C99-85AC-C93392071493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B8E28D9-137E-424D-8488-E9AFFCEDB189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B8E28D9-137E-424D-8488-E9AFFCEDB189}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B8E28D9-137E-424D-8488-E9AFFCEDB189}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B8E28D9-137E-424D-8488-E9AFFCEDB189}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98F60C8E-884B-4E51-AC25-94C590EF4399}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98F60C8E-884B-4E51-AC25-94C590EF4399}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98F60C8E-884B-4E51-AC25-94C590EF4399}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98F60C8E-884B-4E51-AC25-94C590EF4399}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DB9953F-7137-41AB-A563-BE82DBF6FEAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB9953F-7137-41AB-A563-BE82DBF6FEAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DB9953F-7137-41AB-A563-BE82DBF6FEAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DB9953F-7137-41AB-A563-BE82DBF6FEAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DFC88E7-8547-42D9-B9F6-5DE92B92ACD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DFC88E7-8547-42D9-B9F6-5DE92B92ACD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DFC88E7-8547-42D9-B9F6-5DE92B92ACD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DFC88E7-8547-42D9-B9F6-5DE92B92ACD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
