@@ -75,7 +75,7 @@ namespace Altkom.DotnetCore.WebApp.Controllers
         public async Task<IActionResult> Post(Customer customer)
         {
             customerService.Add(customer);
-
+            
             await hubContext.Clients.All.SendAsync("Added", customer);
 
             await hubContext.Clients.Group("Altkom").SendAsync("Added", customer);

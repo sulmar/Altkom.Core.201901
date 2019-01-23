@@ -11,6 +11,11 @@ namespace Altkom.DotnetCore.IServices
         
     }
 
+    public interface ICustomerServiceAsync
+        : IItemServiceAsync<Customer>
+    {
+    }
+
 
 
 }

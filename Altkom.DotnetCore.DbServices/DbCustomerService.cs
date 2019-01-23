@@ -5,10 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Altkom.DotnetCore.DbServices
 {
-    public class DbCustomerService : ICustomerService
+    public class DbCustomerService : ICustomerService, ICustomerServiceAsync
     {
         private readonly MyContext context;
 
@@ -26,6 +27,11 @@ namespace Altkom.DotnetCore.DbServices
 
             context.SaveChanges();
             Trace.WriteLine($"{context.Entry(item).State}");
+        }
+
+        public Task AddAsync(Customer item)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Customer> Get()
@@ -47,6 +53,18 @@ namespace Altkom.DotnetCore.DbServices
             return context.Customers.Find(id);
         }
 
+        public Task<IEnumerable<Customer>> GetAsync()
+        {
+            throw new NotImplementedException();
+            // return context.Customers.ToListAsync<Customer>();
+        }
+
+        public async Task<Customer> GetAsync(int id)
+        {
+            throw new NotImplementedException();
+            // return await context.FindAsync(id);
+        }
+
         public void Remove(int id)
         {
             Customer customer = new Customer { Id = id };
@@ -55,12 +73,23 @@ namespace Altkom.DotnetCore.DbServices
             context.SaveChanges();
         }
 
+        public Task RemoveAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Customer item)
         {
             //context.Customers.Attach(item);
             //context.Entry(item).State = EntityState.Modified;
             context.Update(item);
             context.SaveChanges();
+        }
+
+        public async Task UpdateAsync(Customer item)
+        {
+            context.Update(item);
+            await context.SaveChangesAsync();
         }
     }
 }
