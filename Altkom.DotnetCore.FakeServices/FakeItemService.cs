@@ -28,5 +28,10 @@ namespace Altkom.DotnetCore.FakeServices
         public virtual TItem Get(int id) => items.SingleOrDefault(p => p.Id == id);
 
         public virtual void Remove(int id) => items.Remove(Get(id));
+
+        public void Update(TItem item)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

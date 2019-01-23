@@ -1,22 +1,27 @@
 ﻿using Altkom.DotnetCore.IServices;
 using Altkom.DotnetCore.Models;
+using Altkom.DotnetCore.WebApp.Hubs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Altkom.DotnetCore.WebApp.Controllers
-{
+{    
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class CustomersController : Controller
     {
         private readonly ICustomerService customerService;
+        private readonly IHubContext<CustomersHub> hubContext;
 
-        public CustomersController(ICustomerService customerService)
+        public CustomersController(ICustomerService customerService,
+            IHubContext<CustomersHub> hubContext)
         {
             this.customerService = customerService;
+            this.hubContext = hubContext;
         }
 
         [HttpGet]
@@ -67,11 +72,23 @@ namespace Altkom.DotnetCore.WebApp.Controllers
         /// <param name="customer">Customer data</param>
         /// <returns></returns>
         [HttpPost]        
-        public IActionResult Post(Customer customer)
+        public async Task<IActionResult> Post(Customer customer)
         {
             customerService.Add(customer);
 
+            await hubContext.Clients.All.SendAsync("Added", customer);
+
+            await hubContext.Clients.Group("Altkom").SendAsync("Added", customer);
+
+            // hubContext.AddedCustomer(customer);
+
             return CreatedAtRoute(new { id = customer.Id }, customer);
+        }
+
+        [Route("~/[controller]")]
+        public IActionResult Index()
+        {
+            return View();
         }
 
         

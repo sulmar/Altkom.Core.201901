@@ -5,15 +5,18 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
+using Altkom.DotnetCore.DbServices;
 using Altkom.DotnetCore.FakeServices;
 using Altkom.DotnetCore.IServices;
 using Altkom.DotnetCore.WebApp.Formatters;
+using Altkom.DotnetCore.WebApp.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Yaml;
 using Microsoft.Extensions.DependencyInjection;
@@ -85,10 +88,17 @@ namespace Altkom.DotnetCore.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<ICustomerService, FakeCustomerService>();
+            services.AddScoped<ICustomerService, DbCustomerService>();
             services.AddScoped<CustomerFaker>();
             services.AddScoped<IProductService, FakeProductService>();
             services.AddScoped<ProductFaker>();
+
+            services.AddSingleton<CustomersHub>();
+
+
+
+            string connectionString = Configuration.GetConnectionString("MyConnection");
+            services.AddDbContext<MyContext>(options => options.UseSqlServer(connectionString));
 
             // add package Microsoft.AspNetCore.Mvc.Formatters.Xml
             services
@@ -100,6 +110,9 @@ namespace Altkom.DotnetCore.WebApp
                 )
                 .AddXmlSerializerFormatters()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+
+            
 
             // add package Swashbuckle.AspNetCore
             services.AddSwaggerGen(c =>
@@ -113,6 +126,8 @@ namespace Altkom.DotnetCore.WebApp
                 c.IncludeXmlComments(xmlPath);
             });
 
+
+            services.AddSignalR();
 
             //services
             //    .AddMvc(options =>
@@ -171,12 +186,17 @@ namespace Altkom.DotnetCore.WebApp
 
             app.UseSwagger();
 
-           
 
-           
+            app.UseSignalR(routes => 
+                routes.MapHub<CustomersHub>("/hubs/customers"));
+
+
+            app.UseStaticFiles();
 
             // app.UseHttpsRedirection();
             app.UseMvc();
+
+
         }
     }
 }

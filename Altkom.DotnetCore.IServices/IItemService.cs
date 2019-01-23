@@ -8,6 +8,7 @@ namespace Altkom.DotnetCore.IServices
         TItem Get(int id);
         void Add(TItem item);
         void Remove(int id);
+        void Update(TItem item);
     }
 
 

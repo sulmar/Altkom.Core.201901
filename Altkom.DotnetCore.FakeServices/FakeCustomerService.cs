@@ -42,5 +42,10 @@ namespace Altkom.DotnetCore.FakeServices
         }
 
         public void Remove(int id) => customers.Remove(Get(id));
+
+        public void Update(Customer item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

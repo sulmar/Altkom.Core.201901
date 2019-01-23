@@ -5,7 +5,7 @@ using System.Text;
 namespace Altkom.DotnetCore.Models
 {
     public abstract class Base
-    {
+    {        
         public int Id { get; set; }
     }
 }

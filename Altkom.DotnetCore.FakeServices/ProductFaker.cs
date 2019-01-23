@@ -13,7 +13,19 @@ namespace Altkom.DotnetCore.FakeServices
             StrictMode(true);
             RuleFor(p => p.Id, f => f.IndexFaker);
             RuleFor(p => p.Name, f => f.Commerce.ProductName());
-            RuleFor(p => p.Color, f => f.Commerce.Color());
         }
+    }
+
+    public class ArticleFaker : Faker<Article>
+    {
+        public ArticleFaker()
+        {
+            StrictMode(true);
+            RuleFor(p => p.Id, f => f.IndexFaker);
+            RuleFor(p => p.Name, f => f.Commerce.ProductName());
+            RuleFor(p => p.Color, f => f.Commerce.Color());
+        }   
+            
+        
     }
 }
